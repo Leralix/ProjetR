@@ -1,0 +1,12 @@
+install.packages("shiny")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("tidyverse")
+install.packages("gapminder")
+
+
+library(shiny)
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
