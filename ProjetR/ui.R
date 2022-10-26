@@ -1,5 +1,4 @@
 library(ggplot2)
-library(gapminder)
 
 
 # Define UI for application that draws a histogram
@@ -23,5 +22,11 @@ ui <- fluidPage(
     mainPanel(
       plotOutput(outputId = "plot")
     )
+  ),
+  mainPanel(
+    plotOutput(outputId = "plot2")
+  ),
+  mainPanel(
+    plotOutput(outputId = "plot3")
   )
 )
