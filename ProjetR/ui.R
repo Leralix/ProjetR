@@ -1,3 +1,7 @@
+library(ggplot2)
+library(gapminder)
+
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   
