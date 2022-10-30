@@ -3,7 +3,9 @@ install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("tidyverse")
 install.packages("gapminder")
-
+install.packages("geojsonio")
+install.packages("broom")
+install.packages("mapproj")
 
 library(shiny)
 library(gapminder)

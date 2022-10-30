@@ -28,5 +28,14 @@ ui <- fluidPage(
   ),
   mainPanel(
     plotOutput(outputId = "plot3")
+  ),
+  mainPanel(
+    plotOutput(outputId = "plot4")
+  ),
+  mainPanel(
+    plotOutput(outputId = "plot5")
+  ),
+  mainPanel(
+    plotOutput(outputId = "plot6")
   )
 )
