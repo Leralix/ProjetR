@@ -6,6 +6,7 @@ install.packages("gapminder")
 install.packages("geojsonio")
 install.packages("broom")
 install.packages("mapproj")
+install.packages("treemapify")
 
 library(shiny)
 library(gapminder)
