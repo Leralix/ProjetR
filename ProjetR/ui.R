@@ -1,5 +1,6 @@
 library(ggplot2)
-
+df <- read.table("LaCentrale_60Pages.csv", header = TRUE, sep = ",", quote ='', dec = ".", fill = TRUE, comment.char = "")
+da=df
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -151,4 +152,9 @@ titlePanel("Année du véhicule et lien avec son impact écologie"),
     
   ),
 
+
+titlePanel("Pourcentage des \" Crit' air\" des voitures construites a partir de 2000"),
+  mainPanel(
+    plotOutput(outputId = "plot7")
+    )
 )

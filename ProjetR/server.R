@@ -82,8 +82,12 @@ server <- function(input, output) {
     co%>%ggplot(aes(x="",y=n,fill=Localisation))+geom_bar(stat="identity")+coord_polar("y",start=0)+theme_void()
  
   })
-                                                                                                                                                                                                                                                                                                                                                                      
-
+  
+  da2000 <- da[da$Année >= 2000, ]                                                                                                                                                                                                                                                                                                                                                             
+  output$plot7 <- renderPlot({
+    da2000%>%group_by(Année)%>%count(CritAir) %>% ggplot(aes(x=Année,y=n,fill=factor(CritAir)))+geom_bar(stat="identity", position="fill")+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+theme(axis.text.x=element_text(angle=90))+ggtitle("Evolution du \" Crit' air\" des voitures construites entre 2000")
+    #da%>%group_by(Année)%>%count(CritAir) %>% ggplot(aes(x=Année,y=n,fill=factor(CritAir)))+geom_bar(stat="identity")+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+theme(axis.text.x=element_text(angle=90))+ggtitle("Répartition CritAir par Année")
+  })
   
   
 }
