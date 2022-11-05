@@ -41,7 +41,7 @@ server <- function(input, output) {
 
   #Création d'un histogramme de la répartition des émissions de co2
   output$Repartition_Emission <- renderPlot({
-      ggplot(da,aes(x=Émissions_de_CO2))+geom_histogram()+ggtitle("Répartition des émissions de CO2")+labs(x="Émissions de CO2 (en g/km)",y="Compte")
+      ggplot(da,aes(x=Émissions_de_CO2))+geom_histogram()+ggtitle("Répartition des émissions de CO2")+labs(x="Émissions de CO2 (en g/km)",y="Nombre de voitures")
   })
   
   
@@ -66,13 +66,13 @@ server <- function(input, output) {
   
   #Création bar chart de la répartition des énergies employées
   output$Bar_Energie <- renderPlot({
-    da%>%count(Énergie)%>% ggplot(aes(x=n,y=Énergie,fill=Énergie))+      geom_bar(stat="identity",width=1,color="white")+geom_text(aes(label=n), color="black", size=3.5)+ggtitle("Type de consommation des véhicules vendus (bar_chart)")+labs(x="Compte")
+    da%>%count(Énergie)%>% ggplot(aes(x=n,y=Énergie,fill=Énergie))+      geom_bar(stat="identity",width=1,color="white")+geom_text(aes(label=n), color="black", size=3.5)+ggtitle("Type de consommation des véhicules vendus (bar_chart)")+labs(x="Nombre de voitures")
   })
   
   
   #Création bar_chart de la répartition des Crit'Air par marque
   output$CritAir_Marque <- renderPlot({
-    da%>%group_by(marque)%>%count(CritAir) %>% ggplot(aes(x=marque,y=n,fill=factor(CritAir)))+geom_bar(stat="identity")+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+theme(axis.text.x=element_text(angle=90))+ggtitle("Répartition des CritAir par marque")+labs(y="Marque de voiture",y="Compte")
+    da%>%group_by(marque)%>%count(CritAir) %>% ggplot(aes(x=marque,y=n,fill=factor(CritAir)))+geom_bar(stat="identity")+scale_fill_manual(name="Crit'Air",values=c("#a5fc03","green","yellow","orange","red","black"))+theme(axis.text.x=element_text(angle=90))+ggtitle("Répartition des CritAir par marque")+labs(x="Marque de voiture",y="Nombre de voitures")
   })
   
   #Création map du nombre de vente par régions
@@ -112,13 +112,13 @@ server <- function(input, output) {
   plotType <- function(type) {
     switch(type,
            #Si type vaut 'CritAir' alors renvoie ce graphique
-           CritAir= da%>%ggplot(aes(x=Année,fill=as.factor(CritAir)))+geom_bar()+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+ggtitle("Évolution du Crit'Air par année de mise en circulation des véhicule \n mis en vente")+labs(fill="Crit'Air",x="Année de mise en circulation",y="Compte"),
+           CritAir= da%>%ggplot(aes(x=Année,fill=as.factor(CritAir)))+geom_bar()+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+ggtitle("Évolution du Crit'Air par année de mise en circulation des véhicule \n mis en vente")+labs(fill="Crit'Air",x="Année de mise en circulation",y="Nombre de voitures"),
            #Si type vaut 'Controle_technique' alors renvoie ce graphique
-           Contrôle_technique = da%>%ggplot(aes(x=Année,fill=factor(Contrôle_technique)))+geom_bar()+scale_fill_manual(values=c("green","red","grey"))+ggtitle("Évolution de la nécessité du contrôle technique par année de mise \n en circulation des véhicule mis en vente")+labs(fill="Contrôle technique",x="Année de mise en circulation",y="Compte"),
+           Contrôle_technique = da%>%ggplot(aes(x=Année,fill=factor(Contrôle_technique)))+geom_bar()+scale_fill_manual(values=c("green","red","grey"))+ggtitle("Évolution de la nécessité du contrôle technique par année de mise \n en circulation des véhicule mis en vente")+labs(fill="Contrôle technique",x="Année de mise en circulation",y="Nombre de voitures"),
            #Si type vaut 'Classe_Emission' alors renvoie ce graphique
-           Classe_Emission=da%>%ggplot(aes(x=Année,fill=factor(Classe_Emission)))+geom_bar()+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red","black"))+ggtitle("Évolution de la classe d'émission par année \n de mise en circulation des véhicule mis en vente")+labs(fill="Classe d'émission",x="Année de mise en circulation",y="Compte"),
+           Classe_Emission=da%>%ggplot(aes(x=Année,fill=factor(Classe_Emission)))+geom_bar()+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red","black"))+ggtitle("Évolution de la classe d'émission par année \n de mise en circulation des véhicule mis en vente")+labs(fill="Classe d'émission",x="Année de mise en circulation",y="Nombre de voitures"),
            #Si type vaut 'Norme_Euro' alors renvoie ce graphique
-           Norme_Euro=da%>%ggplot(aes(x=Année,fill=factor(Norme_Euro)))+geom_bar()+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red"))+ggtitle("Évolution de la Norme Euro par année de \n mise en circulation des véhicule mis en vente")+labs(fill="Norme Euro",x="Année de mise en circulation",y="Compte")
+           Norme_Euro=da%>%ggplot(aes(x=Année,fill=factor(Norme_Euro)))+geom_bar()+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red"))+ggtitle("Évolution de la Norme Euro par année de \n mise en circulation des véhicule mis en vente")+labs(fill="Norme Euro",x="Année de mise en circulation",y="Nombre de voitures")
            )
   }
   
@@ -134,13 +134,13 @@ server <- function(input, output) {
   plotType2 <- function(type) {
     switch(type,
            #Si type vaut 'CritAir' alors renvoie ce graphique
-           CritAir= da[da$Année >= 2000, ]%>%group_by(Année)%>%count(CritAir) %>% ggplot(aes(x=Année,y=n,fill=factor(CritAir)))+geom_bar(stat="identity", position="fill")+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+theme(axis.text.x=element_text(angle=90))+ggtitle("Évolution du Crit'Air par année de mise en circulation des véhicule \n mis en vente (à partir des années 2000)")+labs(fill="Crit'Air",x="Année de mise en circulation",y="Compte"),
+           CritAir= da[da$Année >= 2000, ]%>%group_by(Année)%>%count(CritAir) %>% ggplot(aes(x=Année,y=n,fill=factor(CritAir)))+geom_bar(stat="identity", position="fill")+scale_fill_manual(values=c("#a5fc03","green","yellow","orange","red","black"))+theme(axis.text.x=element_text(angle=90))+ggtitle("Évolution du Crit'Air par année de mise en circulation des véhicule \n mis en vente (à partir des années 2000)")+labs(fill="Crit'Air",x="Année de mise en circulation",y="Nombre de voitures"),
            #Si type vaut 'Controle_technique' alors renvoie ce graphique
-           Contrôle_technique = da[da$Année >= 2000, ]%>%group_by(Année)%>%count(Contrôle_technique) %>% ggplot(aes(x=Année,y=n,fill=factor(Contrôle_technique)))+geom_bar(stat="identity", position="fill")+theme(axis.text.x=element_text(angle=90))+scale_fill_manual(values=c("green","red","grey"))+ggtitle("Évolution de la nécessité du contrôle technique par année de mise en \n circulation des véhicule mis en vente (à partir des années 2000)")+labs(fill="Contrôle technique",x="Année de mise en circulation (à partir des années 2000)",y="Compte"),
+           Contrôle_technique = da[da$Année >= 2000, ]%>%group_by(Année)%>%count(Contrôle_technique) %>% ggplot(aes(x=Année,y=n,fill=factor(Contrôle_technique)))+geom_bar(stat="identity", position="fill")+theme(axis.text.x=element_text(angle=90))+scale_fill_manual(values=c("green","red","grey"))+ggtitle("Évolution de la nécessité du contrôle technique par année de mise en \n circulation des véhicule mis en vente (à partir des années 2000)")+labs(fill="Contrôle technique",x="Année de mise en circulation (à partir des années 2000)",y="Nombre de voitures"),
            #Si type vaut 'Classe_Emission' alors renvoie ce graphique
-           Classe_Emission=da[da$Année >= 2000, ]%>%group_by(Année)%>%count(Classe_Emission) %>% ggplot(aes(x=Année,y=n,fill=factor(Classe_Emission)))+geom_bar(stat="identity", position="fill")+theme(axis.text.x=element_text(angle=90))+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red","black"))+ggtitle("Évolution de la classe d'émission par année de \n mise en circulation des véhicule mis en vente (à partir des années 2000)")+labs(fill="Classe d'émission",x="Année de mise en circulation",y="Compte"),
+           Classe_Emission=da[da$Année >= 2000, ]%>%group_by(Année)%>%count(Classe_Emission) %>% ggplot(aes(x=Année,y=n,fill=factor(Classe_Emission)))+geom_bar(stat="identity", position="fill")+theme(axis.text.x=element_text(angle=90))+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red","black"))+ggtitle("Évolution de la classe d'émission par année de \n mise en circulation des véhicule mis en vente (à partir des années 2000)")+labs(fill="Classe d'émission",x="Année de mise en circulation",y="Nombre de voitures"),
            #Si type vaut 'Norme_Euro' alors renvoie ce graphique
-           Norme_Euro=da[da$Année >= 2000, ]%>%group_by(Année)%>%count(Norme_Euro) %>% ggplot(aes(x=Année,y=n,fill=factor(Norme_Euro)))+geom_bar(stat="identity", position="fill")+theme(axis.text.x=element_text(angle=90))+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red"))+ggtitle("Évolution de la Norme Euro par année de mise en \n circulation des véhicule mis en vente (à partir des années 2000)")+labs(fill="Norme Euro",x="Année de mise en circulation (à partir des années 2000)",y="Compte")
+           Norme_Euro=da[da$Année >= 2000, ]%>%group_by(Année)%>%count(Norme_Euro) %>% ggplot(aes(x=Année,y=n,fill=factor(Norme_Euro)))+geom_bar(stat="identity", position="fill")+theme(axis.text.x=element_text(angle=90))+scale_fill_manual(values=c("grey","#a5fc03","green","yellow","orange","darkorange3","red"))+ggtitle("Évolution de la Norme Euro par année de mise en \n circulation des véhicule mis en vente (à partir des années 2000)")+labs(fill="Norme Euro",x="Année de mise en circulation (à partir des années 2000)",y="Nombre de voitures")
     )
   }
   
