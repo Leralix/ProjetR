@@ -8,7 +8,7 @@ library(tidyverse)
 #Fichier définissant le création de tous les graphiques et élément visuels
 
 #Transformation du fichier .csv en table utilisable en R
-df <- read.table("LaCentrale_60Pages.csv", header = TRUE, sep = ",", quote ='', dec = ".", fill = TRUE, comment.char = "")
+df <- read.table("./data/data.csv", header = TRUE, sep = ",", quote ='', dec = ".", fill = TRUE, comment.char = "")
 
 #Déclaration d'une copie de df pour faire les opérations
 da=df
@@ -23,7 +23,7 @@ da$Puissance_din=as.integer(parse_number(da$Puissance_din))
 #Mise en place des données pour créer une carte
 #Fait en s'aidant de : https://r-graph-gallery.com/327-chloropleth-map-from-geojson-with-ggplot2.html
 #Lecture du fichier json contenant les informations
-spdf <- geojson_read("ze2020_2022 - Copie.json",what="sp")
+spdf <- geojson_read("./data/departement.json",what="sp")
 #Fortification de la table par région à l'aide de l'information "code"
 spdf_fortified <- tidy(spdf,region="code")
 

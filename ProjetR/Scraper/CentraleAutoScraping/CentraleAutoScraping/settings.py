@@ -59,6 +59,10 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
 
 }
+
+#Informations pour la rotation d'IP permettant de ne pas être bannis
+#Le fichier HTTP-proxies.txt contient les proxy sur lesquels le scraper va tourner
+#(Ce fichier ne doit pas être supprimé !")
 PROXY_LIST = 'Scraper/CentraleAutoScraping/CentraleAutoScraping/spiders/HTTP-proxies.txt'
 PROXY_MODE = 0
 
@@ -74,9 +78,9 @@ ITEM_PIPELINES = {
     'Scraper.CentraleAutoScraping.CentraleAutoScraping.pipelines.CentraleautoscrapingPipeline': 300,
 }
 
-
+#Nom du fichier de sortie et son format
 FEED_FORMAT = 'csv'
-FEED_URI = "data.csv"
+FEED_URI = "data/data_2.csv"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
