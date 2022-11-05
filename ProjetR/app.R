@@ -7,17 +7,20 @@
 #    http://shiny.rstudio.com/
 #
 
+#Fichier principal permettant de lancer le dashboard
 
+#Changement du répertoire courant pour pouvoir récupérer les fichiers à la racine pour l'éxécution
 setwd(dirname(getwd()))
-
-
 
 library(shiny)
 
 
+#Importation des fichiers ui et server, contenant ce qui est nécessaire au bon lancement du dashboard
 source('ui.R')
 source('server.R')
 
 
-# Run the application 
+# Lance l'application
+#A l'aide de l'ui récupérer dans ui.R
+#Et le server récupérer dans server.R
 shinyApp(ui = ui, server = server)
