@@ -55,6 +55,8 @@ app.R
 ### Utilisation
 <p>Une fois le fichier app.R lancé, il est possible d'intéragir avec le dashboard par le biais de slider et de bouttons cliquables.</p>
 
+<a name="dev">
+
 ## Guide développeur
 
 <p> Le code du projet est organisé en plusieurs fichiers R, et les bases de données:</p>
@@ -71,6 +73,7 @@ app.R
 <p>Toute la récupération de données se passe dans 'spiders.py'</p>
 <p>Toutes les options relatives à la récupération tel que : le délai des requêtes, la rotation d'IP... se trouve dans settings.py</p>
 
+<a name="analyse">
 
 ## Analyse des résultats
 <p>Les voitures vendues d'occasion sont de tout age, toute marque et de tout budget. En plus d'avoir une bonne vision des voitures d'occasion a voir, On peut affirmer que cela nous permet aussi d'avoir un aperçu assez fiable du parc automobile français.</p>
