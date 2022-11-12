@@ -12,7 +12,7 @@ ui <- fluidPage(
       tabsetPanel(
         tabPanel(
           "Infos",
-            p("La table possède ",nrow(da)," lignes de données, pour ",ncol(da)," colonnes de données. Chaque ligne représente un véhicule mis en vente."),
+            p("La table possède lignes de données, pour colonnes de données. Chaque ligne représente un véhicule mis en vente."),
             p("Ce dashboard vise à observer le phénomène de la vente de véhicule d'occasion et en tirer des conclusions et en faire un lien avec son impact environnemental"),
             p("Les données ont été scrapées depuis le site 'La Centrale Auto' de manière respectueuse, et vont donc servir à la création de ce dashboard."),
             p("Quant à la création de la carte, on utilise un .json donné sur un site (lien sur le github).")
