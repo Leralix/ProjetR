@@ -69,9 +69,20 @@ app.R
 <p>Si des modifications/ajouts relatifs au graphiques doivent être faits alors se référer à server.r</p>
 
 <br>
+<p>L'éxécution de <code>get_data.py</code> lance le scraper sur un certains nombres de pages données (modificables) et récupère le fichier .json pour la création de la carte des départements.</p>
+
+
+<br>
 <p>Il est aussi possible d'intéragir avec la récupération de données du scraper.</p>
-<p>Toute la récupération de données se passe dans 'spiders.py'</p>
-<p>Toutes les options relatives à la récupération tel que : le délai des requêtes, la rotation d'IP... se trouve dans settings.py</p>
+<p>Toute la récupération de données se passe dans le dossier <code>Scraper/CentraleAutoCraping/CentraleAutoScraping/</code></p>
+<p>Toutes les options relatives à la récupération tel que : le délai des requêtes, la rotation d'IP... se trouve dans <code>settings.py</code>. </p>
+<br>
+<p>De plus, on peut y modifier le nom et le format du fichier créer en sortie, à l'originie c'est un fichier en <code>.csv</code> appelé <code>data_2.csv</code>, il est donc possible de changé se nom et se format, cela se trouve dans <code>settings.py</code> : </p>
+
+<ul><li><code>FEED_FORMAT</code> : contrôle le type du fichier de sortie</li>
+<li><code>FEED_URI</code> : contrôle le nom du fichier</li>
+</ul>
+
 
 <a name="analyse">
 
