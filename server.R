@@ -41,8 +41,8 @@ server <- function(input, output) {
 
   #Création d'un histogramme de la répartition des émissions de co2
   output$Repartition_Emission <- renderPlot({
-      ggplot(da,aes(x=Émissions_de_CO2))+geom_histogram()+ggtitle("Répartition des émissions de CO2")+labs(x="Émissions de CO2 (en g/km)",y="Nombre de voitures")
-  })
+      da%>%drop_na(Émissions_de_CO2)%>%ggplot(aes(x=Émissions_de_CO2))+geom_histogram(binwidth = 10)+ggtitle("Répartition des émissions de CO2")+labs(x="Émissions de CO2 (en g/km)",y="Nombre de voitures")
+    })
   
   
   #Création treemap du nombre de véhicules vendus par marques
@@ -102,8 +102,13 @@ server <- function(input, output) {
   
   #Création diagramme bulle entre le prix et la puissance, par emission de co2
   output$Bubble_Emiss_Puiss_Prix <- renderPlot({
-    da%>%group_by(Nombre_de_places)%>%ggplot(aes(x=prix,y=Puissance_din,size=abs(scale(Émissions_de_CO2))*10,color=Classe_Emission))+geom_point(alpha=0.5)+scale_color_brewer(palette="YlOrRd",name="Classe d'émission")+xlim(input$RangeBubbleGraph[1],input$RangeBubbleGraph[2])+labs(x="Prix",y="Puissance (en ch.)",size="Émission de CO2 (en g/km) (normalisé et multiplié par 10)")
-  })
+    #da%>%group_by(Nombre_de_places)%>%ggplot(aes(x=prix,y=Puissance_din,size=abs(scale(Émissions_de_CO2))*10,color=Classe_Emission))+geom_point(alpha=0.5)+scale_color_brewer(palette="YlOrRd",name="Classe d'émission")+xlim(input$RangeBubbleGraph[1],input$RangeBubbleGraph[2])+labs(x="Prix",y="Puissance (en ch.)",size="Émission de CO2 (en g/km) (normalisé et multiplié par 10)")
+    
+    vars=c("prix","Nombre_de_places","Émissions_de_CO2","Classe_Emission","Puissance_din")
+  
+    da%>%filter(between(prix,input$RangeBubbleGraph[1],input$RangeBubbleGraph[2]))%>%drop_na(any_of(vars))%>%ggplot(aes(x=prix,y=Puissance_din,size=abs(scale(Émissions_de_CO2))*10,color=Classe_Emission))+geom_point(alpha=0.5)+scale_color_brewer(palette="YlOrRd",name="Classe d'émission")+labs(x="Prix",y="Puissance (en ch.)",size="Émission de CO2 (en g/km) (normalisé et multiplié par 10)")
+    
+    })
   
   
   #Création d'une fonction pour choisir un graph en fonction d'une entrée
